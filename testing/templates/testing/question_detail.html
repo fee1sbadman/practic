@@ -1,4 +1,6 @@
-<html>
+{% extends 'testing/base.html' %}
+
+{%block content%}
 <h1>{{question.name}}</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action = "{% url 'vote' question.id %}" method = 'post'>
@@ -8,4 +10,4 @@
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
     {% endfor %}
     <input type="submit" value="Vote" />
-</html>
+{%endblock%}

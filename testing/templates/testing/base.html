@@ -1,14 +1,24 @@
 {% load static %}
 <html>
     <head>
-        <title>Django</title>
-        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <title>Практика</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     </head>
     <body>
-        <div class="page-header">
-            <h1><a href="/">Django</a></h1>
-        </div>
 
+<div id="header" class="page-header">
+	<div id='logo'>
+		<h1>Django</h1>
+    </div>
+	<div id="menu">
+		<ul>
+			<li><a href="/">Homepage</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</div>
+
+</div>
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
