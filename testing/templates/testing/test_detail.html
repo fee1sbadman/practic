@@ -1,0 +1,8 @@
+{% extends 'testing/base.html' %}
+
+{%block content%}
+<h1>Название теста: {{test.name}}</h1>
+<h2>Информация</h2>
+<p>{{test.info}}</p>
+<li><a href = "{%url 'question_detail' test_id=test.id pk=1%}">Пройти тест</li>
+{% endblock %}
