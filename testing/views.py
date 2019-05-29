@@ -13,13 +13,12 @@ def question_detail(request, test_id, pk):
         question = test.question_set.all()[pk-1:pk].get()
         return render(request, 'testing/question_detail.html', {'question': question, 'pk': pk})
     else:
-        return render(request, 'testing/result.html')
+        return HttpResponseRedirect(reverse('results', args = (test.id, )))
 
 
-
-class TestList(generic.ListView):
-    model = Test
-    template_name = 'testing/test_list.html'
+def test_list(request):
+    test = Test.objects.all()
+    return render(request, 'testing/test_list.html', {'test': test})
 
 
 def test_detail(request, pk):
@@ -41,7 +40,8 @@ def vote(request, question_id):
     else:
         #selected_choice.votes += 1
         #selected_choice.save()
-        if selected_choice.pk == question.right_choice:
+        
+        if selected_choice.votes == question.right_choice:
             test.bal += 1
             test.save()
         #question = test.question_set.all()[question_id:question_id+1].get()
@@ -50,6 +50,13 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('question_detail', args=(test.id, question.id + 1, )))
 
+def zero(request, test_id):
+    test = get_object_or_404(Test, pk = test_id)
+    test.bal = 0
+    test.save()
+    return HttpResponseRedirect(reverse('test_list'))
 
-def results(request):
-    return render(request, 'testing/result.html')
+
+def results(request, pk):
+    test = get_object_or_404(Test, pk = pk)
+    return render(request, 'testing/result.html', {'test': test})

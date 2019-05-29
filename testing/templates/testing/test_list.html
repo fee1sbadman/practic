@@ -1,7 +1,7 @@
 {% extends 'testing/base.html' %}
 
 {%block content%}
-{% for test in test_list %}
-<li><a href = "{% url 'test_detail' pk=test.pk %}">{{test.name}}</li>
+{% for t in test %}
+<li><a href = "{% url 'test_detail' pk=t.pk %}">{{t.name}}</li>
 {% endfor %}
 {% endblock %}

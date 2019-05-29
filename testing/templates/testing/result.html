@@ -1,1 +1,9 @@
-<h1>WorK!!!</h1>
+{% extends 'testing/base.html' %}
+
+{%block content%}
+    <form action = "{% url 'zero' test.id %}" method = 'post'>
+{% csrf_token %}
+<h1>Всего: {{test.question_set.count}}</h1>
+<h2> Ваш балл: {{test.bal}}</h2>
+    <input type="submit" value="Хорошо" />
+{% endblock %}
