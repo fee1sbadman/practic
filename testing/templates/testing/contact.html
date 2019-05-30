@@ -1,0 +1,10 @@
+{%extends 'testing/base.html'%}
+
+{%block content%}
+{% if user.is_authenticated %}
+    <h1>{{user.get_username}}</h1>
+    <p>{{user.profile.test}}</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+{% endif %}
+{%endblock%}

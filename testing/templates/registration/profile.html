@@ -1,0 +1,9 @@
+{% extends "testing/base.html" %}
+
+{%block content%}
+{% if user.is_authenticated %}
+<ul>
+    <li>{{user.username}}</li>
+    <li>{{user.test}}</li>
+</ul>
+{%endblock%}

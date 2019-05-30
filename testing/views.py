@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Question, Choice, Test
+from .models import Question, Choice, Test, User
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.views import generic
@@ -50,7 +50,17 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('question_detail', args=(test.id, question.id + 1, )))
 
-def zero(request, test_id):
+def zero(request, test_id, user_id):
+    test = get_object_or_404(Test, pk = test_id)
+    user = User.objects.get(pk = user_id)
+    user.profile.test +=' |' + test.name +' - ' + str(test.bal) 
+    user.save()
+    test.bal = 0
+    test.save()
+    return HttpResponseRedirect(reverse('test_list'))
+
+
+def bal(request, test_id):
     test = get_object_or_404(Test, pk = test_id)
     test.bal = 0
     test.save()
@@ -60,3 +70,7 @@ def zero(request, test_id):
 def results(request, pk):
     test = get_object_or_404(Test, pk = pk)
     return render(request, 'testing/result.html', {'test': test})
+
+
+def contact(request):
+    return render (request, 'testing/contact.html')
